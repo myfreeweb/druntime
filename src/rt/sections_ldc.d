@@ -106,12 +106,29 @@ private
             void* _bss_end__;
         }
     }
-    else version (Windows)
+    else version (MinGW)
     {
-        extern extern (C) __gshared
+        version (Win32)
         {
-            int _data_start__;
-            int _bss_end__;
+            extern extern (C) __gshared
+            {
+                int _data_start__;
+                int _bss_end__;
+            }
+        }
+        else version (Win64)
+        {
+            extern extern (C) __gshared
+            {
+                int __data_start__;
+                int __bss_end__;
+            }
+            alias _data_start__ = __data_start__;
+            alias _bss_end__ = __bss_end__;
+        }
+        else
+        {
+            static assert(false, "Unsupported platform");
         }
     }
     else version (UseELF)
@@ -379,7 +396,7 @@ void initSections()
             pushRange(_bss_start__, _bss_end__);
         }
     }
-    else version (Windows)
+    else version (MinGW)
     {
         pushRange(&_data_start__, &_bss_end__);
     }
