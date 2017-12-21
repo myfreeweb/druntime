@@ -142,6 +142,36 @@ else version( FreeBSD )
 
     dirent* readdir(DIR*);
 }
+else version( DragonFlyBSD )
+{
+    enum
+    {
+        DT_UNKNOWN  = 0,
+        DT_FIFO     = 1,
+        DT_CHR      = 2,
+        DT_DIR      = 4,
+        DT_BLK      = 6,
+        DT_REG      = 8,
+        DT_LNK      = 10,
+        DT_SOCK     = 12,
+        DT_WHT      = 14,
+        DT_DBF      = 15,         /* database record file */
+    }
+
+    struct dirent
+    {
+        ino_t     d_fileno;       /* file number of entry */
+        ushort    d_reclen;       /* strlen(d_name) */
+        ubyte     d_type;         /* file type, see blow */
+        ubyte     d_unused1;      /* padding, reserved */
+        uint      d_unused2;      /* reserved */
+        char[256] d_name;         /* name, NUL-terminated */
+    }
+
+    alias void* DIR;
+
+    dirent* readdir(DIR*);
+}
 else version (Solaris)
 {
     struct dirent
@@ -245,6 +275,10 @@ else version( FreeBSD )
 {
     int readdir_r(DIR*, dirent*, dirent**);
 }
+else version( DragonFlyBSD )
+{
+    int readdir_r(DIR*, dirent*, dirent**);
+}
 else version (Solaris)
 {
     static if (__USE_LARGEFILE64)
@@ -280,6 +314,11 @@ version( CRuntime_Glibc )
     c_long telldir(DIR*);
 }
 else version( FreeBSD )
+{
+    void   seekdir(DIR*, c_long);
+    c_long telldir(DIR*);
+}
+else version( DragonFlyBSD )
 {
     void   seekdir(DIR*, c_long);
     c_long telldir(DIR*);
