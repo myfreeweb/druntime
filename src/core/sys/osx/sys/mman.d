@@ -1,5 +1,5 @@
 /**
- * D header file for FreeBSD
+ * D header file for OSX
  *
  * Authors: Martin Nowak
  */

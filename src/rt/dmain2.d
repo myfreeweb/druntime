@@ -36,6 +36,10 @@ version (FreeBSD)
 {
     import core.stdc.fenv;
 }
+version (DragonFlyBSD)
+{
+    import core.stdc.fenv;
+}
 
 extern (C) void _d_monitor_staticctor();
 extern (C) void _d_monitor_staticdtor();

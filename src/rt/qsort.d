@@ -48,6 +48,21 @@ else version (FreeBSD)
         return a;
     }
 }
+else version (DragonFlyBSD)
+{
+    alias extern (C) int function(void *, const void *, const void *) Cmp;
+    extern (C) void qsort_r(void *base, size_t nmemb, size_t size, void *thunk, Cmp cmp);
+
+    extern (C) void[] _adSort(void[] a, TypeInfo ti)
+    {
+        extern (C) int cmp(void* ti, in void* p1, in void* p2)
+        {
+            return (cast(TypeInfo)ti).compare(p1, p2);
+        }
+        qsort_r(a.ptr, a.length, ti.tsize, cast(void*)ti, &cmp);
+        return a;
+    }
+}
 else version (OSX)
 {
     alias extern (C) int function(void *, const void *, const void *) Cmp;
