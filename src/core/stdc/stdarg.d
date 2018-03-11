@@ -591,7 +591,7 @@ version( LDC )
             if (ti.alignof >= 8)
                 ap = cast(va_list)((cast(size_t)ap + 7) & ~7);
             version( BigEndian )
-                auto p = (T.sizeof < size_t.sizeof ? ap + (size_t.sizeof - T.sizeof) : ap);
+                auto p = (tsize < size_t.sizeof ? ap + (size_t.sizeof - tsize) : ap);
             version( LittleEndian )
                 auto p = ap;
             ap += (tsize + size_t.sizeof - 1) & ~(size_t.sizeof - 1);
