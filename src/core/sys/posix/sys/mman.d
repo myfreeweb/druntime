@@ -383,6 +383,10 @@ else version (CRuntime_Bionic)
     {
         enum MAP_ANON       = 0x0020;
     }
+    else version (AArch64)
+    {
+        enum MAP_ANON       = 0x0020;
+    }
     else
     {
         static assert(false, "Architecture not supported.");
