@@ -136,7 +136,7 @@ else version( LDC )
         alias real c_long_double;
     else version( ARM )
         alias real c_long_double;
-    else version( MIPS )
+    else version( MIPS32 )
         alias real c_long_double;
     else version( MIPS64 )
         alias real c_long_double;
