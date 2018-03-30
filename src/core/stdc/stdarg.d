@@ -461,6 +461,12 @@ version( LDC )
             ap += (T.sizeof + size_t.sizeof - 1) & ~(size_t.sizeof - 1);
             return arg;
         }
+        else version( MIPS32 )
+        {
+            T arg = *cast(T*)ap;
+            ap += (T.sizeof + size_t.sizeof - 1) & ~(size_t.sizeof - 1);
+            return arg;
+        }
         else version( MIPS64 )
         {
             T arg = *cast(T*)ap;
@@ -594,6 +600,11 @@ version( LDC )
                 auto p = (tsize < size_t.sizeof ? ap + (size_t.sizeof - tsize) : ap);
             version( LittleEndian )
                 auto p = ap;
+            ap += (tsize + size_t.sizeof - 1) & ~(size_t.sizeof - 1);
+        }
+        else version( MIPS32 )
+        {
+            auto p = (tsize < size_t.sizeof ? ap + (size_t.sizeof - tsize) : ap);
             ap += (tsize + size_t.sizeof - 1) & ~(size_t.sizeof - 1);
         }
         else version( MIPS64 )
