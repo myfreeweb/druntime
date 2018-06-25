@@ -1726,7 +1726,7 @@ do
 
     if (newlength)
     {
-        version (D_InlineAsm_X86)
+        version (none) // LDC: was `D_InlineAsm_X86`
         {
             size_t newsize = void;
 
@@ -1738,7 +1738,7 @@ do
                 jc      Loverflow       ;
             }
         }
-        else version (D_InlineAsm_X86_64)
+        else version (none) // LDC: was `D_InlineAsm_X86_64`
         {
             size_t newsize = void;
 
