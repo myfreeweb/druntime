@@ -8,7 +8,9 @@
  */
 module core.internal.spinlock;
 
-import core.atomic, core.thread;
+version (WebAssembly) {} else:
+
+import core.atomic;
 
 shared struct SpinLock
 {
@@ -50,11 +52,13 @@ shared struct SpinLock
     /// yield with backoff
     void yield(size_t k)
     {
+        import core.thread;
         if (k < pauseThresh)
-            return pause();
+            pause();
         else if (k < 32)
-            return Thread.yield();
-        Thread.sleep(1.msecs);
+            Thread.yield();
+        else
+            Thread.sleep(1.msecs);
     }
 
 private:

@@ -14,6 +14,7 @@
  */
 module core.sync.exception;
 
+version (WebAssembly) {} else:
 
 /**
  * Base class for synchronization errors.

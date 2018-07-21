@@ -13,6 +13,8 @@
 
 module core.stdc.math;
 
+version (WebAssembly) {} else:
+
 private import core.stdc.config;
 
 version (OSX)

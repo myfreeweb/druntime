@@ -27,7 +27,6 @@ module core.math;
 
 version (LDC)
 {
-    import stdc = core.stdc.math;
     import ldc.intrinsics;
     import ldc.llvmasm;
 }
@@ -77,7 +76,10 @@ real sin(real x) @safe pure nothrow;       /* intrinsic */
  * indeterminate.
  */
 version (LDC)
-    alias rndtol = stdc.llroundl;
+{
+    version (WebAssembly) {} else:
+    public import core.stdc.math : rndtol = llroundl;
+}
 else
 long rndtol(real x) @safe pure nothrow;    /* intrinsic */
 
@@ -164,9 +166,12 @@ version (LDC)
             }
         }
     }
-    else // !MinGW
+    else version (WebAssembly)
     {
-        alias ldexp = stdc.ldexpl;
+    }
+    else
+    {
+        public import core.stdc.math : ldexp = ldexpl;
     }
 }
 else

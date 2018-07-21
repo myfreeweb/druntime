@@ -505,6 +505,7 @@ else version( LDC )
 
     void atomicFence() nothrow @nogc @safe
     {
+        version (WebAssembly) {} else
         llvm_memory_fence();
     }
 }

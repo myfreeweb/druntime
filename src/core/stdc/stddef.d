@@ -14,6 +14,8 @@
 
 module core.stdc.stddef;
 
+version (WebAssembly) {} else:
+
 extern (C):
 @trusted: // Types only.
 nothrow:

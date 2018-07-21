@@ -12,6 +12,8 @@
 
 module core.stdc.stdarg;
 
+version (WebAssembly) {} else:
+
 @system:
 //@nogc:    // Not yet, need to make TypeInfo's member functions @nogc first
 nothrow:

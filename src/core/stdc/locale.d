@@ -14,6 +14,8 @@
 
 module core.stdc.locale;
 
+version (WebAssembly) {} else:
+
 version (OSX)
     version = Darwin;
 else version (iOS)

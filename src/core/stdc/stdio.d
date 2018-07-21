@@ -15,6 +15,8 @@
 
 module core.stdc.stdio;
 
+version (WebAssembly) {} else:
+
 version (OSX)
     version = Darwin;
 else version (iOS)

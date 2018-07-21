@@ -11,6 +11,7 @@
 
 module core.thread;
 
+version (WebAssembly) {} else:
 
 public import core.time; // for Duration
 import core.exception : onOutOfMemoryError;

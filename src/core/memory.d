@@ -910,6 +910,7 @@ void pureFree(void* ptr) @system pure @nogc nothrow
 
 // locally purified for internal use here only
 
+version (WebAssembly) {} else
 extern (C) private @system @nogc nothrow
 {
     ref int fakePureErrnoImpl()

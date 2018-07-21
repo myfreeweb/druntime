@@ -15,6 +15,8 @@
 
 module core.stdc.time;
 
+version (WebAssembly) {} else:
+
 private import core.stdc.config;
 
 version (OSX)

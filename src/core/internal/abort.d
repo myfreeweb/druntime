@@ -1,5 +1,14 @@
 module core.internal.abort;
 
+version (WebAssembly)
+{
+    void abort(scope string msg, scope string filename = __FILE__, size_t line = __LINE__) @nogc nothrow @safe
+    {
+        assert(0, msg);
+    }
+}
+else:
+
 /*
  * Use instead of assert(0, msg), since this does not print a message for -release compiled
  * code, and druntime is -release compiled.

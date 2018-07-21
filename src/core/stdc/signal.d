@@ -14,6 +14,8 @@
 
 module core.stdc.signal;
 
+version (WebAssembly) {} else:
+
 extern (C):
 @system:
 nothrow:

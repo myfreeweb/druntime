@@ -680,8 +680,15 @@ extern (C)
     }
 }
 
-// TLS storage shared for all errors, chaining might create circular reference
-private void[128] _store;
+version (WebAssembly)
+{
+    private __gshared void[128] _store;
+}
+else
+{
+    // TLS storage shared for all errors, chaining might create circular reference
+    private void[128] _store;
+}
 
 // only Errors for now as those are rarely chained
 private T staticError(T, Args...)(auto ref Args args)

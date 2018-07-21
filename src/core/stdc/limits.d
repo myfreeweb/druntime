@@ -14,6 +14,8 @@
 
 module core.stdc.limits;
 
+version (WebAssembly) {} else:
+
 private import core.stdc.config;
 
 extern (C):

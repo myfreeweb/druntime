@@ -15,6 +15,7 @@
  */
 module core.sync.config;
 
+version (WebAssembly) {} else:
 
 version( Posix )
 {

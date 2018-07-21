@@ -14,6 +14,8 @@
 
 module core.stdc.inttypes;
 
+version (WebAssembly) {} else:
+
 public import core.stdc.stddef; // for wchar_t
 public import core.stdc.stdint; // required by spec
 

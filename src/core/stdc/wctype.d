@@ -14,6 +14,8 @@
 
 module core.stdc.wctype;
 
+version (WebAssembly) {} else:
+
 public  import core.stdc.wchar_; // for wint_t, WEOF
 
 extern (C):

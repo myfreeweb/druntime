@@ -14,6 +14,8 @@
 
 module core.stdc.stdint;
 
+version (WebAssembly) {} else:
+
 private import core.stdc.config;
 private import core.stdc.stddef; // for wchar_t
 private import core.stdc.signal; // for sig_atomic_t

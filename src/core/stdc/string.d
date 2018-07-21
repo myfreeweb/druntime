@@ -14,6 +14,20 @@
 
 module core.stdc.string;
 
+version (WebAssembly)
+{
+    extern(C) nothrow @nogc pure:
+
+    void* memchr(return const void* s, int c, size_t n);
+    int   memcmp(scope const void* s1, scope const void* s2, size_t n);
+    void* memcpy(return void* s1, scope const void* s2, size_t n);
+    void* memmove(return void* s1, scope const void* s2, size_t n);
+    void* memset(return void* s, int c, size_t n);
+
+    pure size_t strlen(scope const char* s);
+}
+else:
+
 version (OSX)
     version = Darwin;
 else version (iOS)

@@ -14,6 +14,8 @@
 
 module core.stdc.float_;
 
+version (WebAssembly) {} else:
+
 extern (C):
 @trusted: // Constants only.
 nothrow:

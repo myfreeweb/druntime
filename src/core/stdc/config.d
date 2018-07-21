@@ -13,6 +13,8 @@
 
 module core.stdc.config;
 
+version (WebAssembly) {} else:
+
 version (StdDdoc)
 {
     private

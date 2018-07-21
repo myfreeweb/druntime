@@ -2650,6 +2650,7 @@ extern (C) private
 {
     pure @trusted @nogc nothrow pragma(mangle, "fakePureReprintReal") void pureReprintReal(char[] nptr);
 
+    version (WebAssembly) {} else
     void fakePureReprintReal(char[] nptr)
     {
         import core.stdc.stdlib : strtold;

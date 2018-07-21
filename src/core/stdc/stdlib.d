@@ -14,6 +14,25 @@
 
 module core.stdc.stdlib;
 
+version (WebAssembly)
+{
+    extern(C) nothrow @nogc:
+
+    void* malloc(size_t size);
+    void* calloc(size_t nmemb, size_t size);
+    void* realloc(void* ptr, size_t size);
+    void free(void* ptr);
+
+    version (LDC)
+    {
+        pragma(LDC_alloca)
+        void* alloca(size_t size) pure;
+    }
+    else
+        void* alloca(size_t size) pure;
+}
+else:
+
 private import core.stdc.config;
 public import core.stdc.stddef; // for wchar_t
 
