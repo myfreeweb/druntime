@@ -5,6 +5,7 @@ private import ldc.intrinsics;
 extern(C):
 
 int memcmp(void*,void*,size_t);
+void* memcpy(void*, const(void)*, size_t);
 size_t strlen(char*);
 
 // per-element array init routines
@@ -94,7 +95,7 @@ void _d_array_init_mem(void* a, size_t na, void* v, size_t nv)
     auto p = a;
     auto end = a + na*nv;
     while (p !is end) {
-        llvm_memcpy(p,v,nv,0);
+        memcpy(p,v,nv);
         p += nv;
     }
 }
@@ -146,7 +147,7 @@ void _d_array_slice_copy(void* dst, size_t dstlen, void* src, size_t srclen)
     if (dstlen != srclen)
         throw new Exception("lengths don't match for array copy");
     else if (dst+dstlen <= src || src+srclen <= dst)
-        llvm_memcpy!size_t(dst, src, dstlen, 0);
+        memcpy(dst, src, dstlen);
     else
         throw new Exception("overlapping array copy");
 }
