@@ -25,7 +25,7 @@ extern (D) int backtrace(void** buffer, int size)
         asm nothrow @trusted { mov p[EBP], EBP; }
     else version (D_InlineAsm_X86_64)
         asm nothrow @trusted { mov p[RBP], RBP; }
-    else version (AArch64) {
+    else version (AArch64) { // LDC
         import ldc.llvmasm;
         __asm("str x29, $0", "=*m", &p);
     } else
