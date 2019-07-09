@@ -778,7 +778,7 @@ Throwable.TraceInfo defaultTraceHandler( void* ptr = null )
             {
                 version (LDC)
                 {
-                    numframes = backtrace( callstack.ptr, MAXFRAMES );
+                    numframes = cast(int) backtrace( callstack.ptr, MAXFRAMES );
                 }
                 else
                 {
